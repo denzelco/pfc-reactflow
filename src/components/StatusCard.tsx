@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import type IPFCElementInfo from "../dev/IPFCElementInfo";
-import { Handle, Position } from '@xyflow/react';
+import { Handle, Position } from "@xyflow/react";
 
 interface StatusCardProps {
   title: string;
@@ -9,9 +9,8 @@ interface StatusCardProps {
   badge?: string;
   statusColor?: string;
 
-  
   data: {
-    element: IPFCElementInfo; 
+    element: IPFCElementInfo;
     border: string;
     color: string;
     selectedStep: string;
@@ -20,90 +19,101 @@ interface StatusCardProps {
   isConnectable: boolean;
 }
 
-const StatusCard = ({ 
-  data,
-  isConnectable
-}: StatusCardProps) => {
+const StatusCard = ({ data, isConnectable }: StatusCardProps) => {
   const containerStyle: React.CSSProperties = {
-    background: 'white',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-    width: '180px',
-    height: '60px',
-    position: 'relative',
-    display: 'inline-flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: '8px 12px',
-    fontFamily: 'Arial, sans-serif',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+    background: "white",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    width: "150px",
+    height: "65px",
+    position: "relative",
+    display: "inline-flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    padding: "8px 25px 8px 17px",
+    fontFamily: "Arial, sans-serif",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
   };
 
   const leftBarStyle: React.CSSProperties = {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     top: 0,
     bottom: 0,
-    width: '6px',
+    width: "8px",
     background: "green",
-    borderTopLeftRadius: '4px',
-    borderBottomLeftRadius: '4px',
+    borderTopLeftRadius: "4px",
+    borderBottomLeftRadius: "4px",
   };
 
   const titleStyle: React.CSSProperties = {
-    fontSize: '14px',
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: "14px",
+    fontWeight: "bold",
+    color: "#333",
   };
 
   const statusStyle: React.CSSProperties = {
-    fontSize: '12px',
+    fontSize: "12px",
     color: "green",
-    fontWeight: '500',
+    fontWeight: "500",
   };
 
   const modeStyle: React.CSSProperties = {
-    fontSize: '12px',
-    color: '#999',
+    fontSize: "12px",
+    color: "#999",
   };
 
   const badgeStyle: React.CSSProperties = {
-    position: 'absolute',
-    right: '12px',
-    top: '12px',
-    fontSize: '12px',
-    color: '#666',
+    fontSize: "12px",
+    color: "#666",
+  };
+
+  const flexRowStyle: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  };
+
+  const flexColStyle: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
+    width: "100%",
   };
 
   return (
-    <div className="pfc-diagram-step-node"style={containerStyle}>
-        <Handle
+    <div className="pfc-diagram-step-node" style={containerStyle}>
+      <Handle
         type="target"
         position={Position.Top}
-        style={{ background: '#555' }}
+        style={{ background: "#555" }}
         isConnectable={isConnectable}
-        />
-      {/* Left status bar */}
+      />
       <div style={leftBarStyle} />
-      
-      {/* Title */}
-      <div style={titleStyle}>
-            {data.element.ElemName}</div>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-        <div style={statusStyle}>{data.element.RRtState.toUpperCase()}</div>
-        <div style={modeStyle}>
-            {data.element.RRtFailIndex > 0 ? "FAILURE" : "CONDITION"}</div>
+
+      <div style={flexColStyle}>
+        <div style={flexRowStyle}>
+          <div style={titleStyle}>{data.element.ElemName}</div>
+          <div style={badgeStyle}>1</div>
+        </div>
+
+        <div style={flexRowStyle}>
+          <div style={statusStyle}>{data.element.RRtState.toUpperCase()}</div>
+          <div style={modeStyle}>
+            {data.element.RRtFailIndex > 0 ? "FAILURE" : "CONDITION"}
+          </div>
+        </div>
       </div>
-      
-      {/* Badge */}
-      <div style={badgeStyle}>1</div>
-       <Handle
+
+      <Handle
         type="source"
         position={Position.Bottom}
-        style={{ background: '#555' }}
+        style={{ background: "#555" }}
         isConnectable={isConnectable}
-    />
+      />
     </div>
   );
 };
