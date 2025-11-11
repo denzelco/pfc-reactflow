@@ -3,7 +3,8 @@ import { ReactFlow, Background, useReactFlow } from '@xyflow/react';
 import type { Edge, Node, NodeMouseHandler } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
-import CustomEdge from "./dev/CustomEdge";
+import CustomParallelEdge from "./dev/CustomEdge.tsx";
+import CustomEdge from "./dev/CustomEdge.ts";
 import SLVItem from "./dev/SLVItem";
 import type IPFCElementInfo from "./dev/IPFCElementInfo";
 import type IPFCRecipe from "./dev/IPFCRecipe";
